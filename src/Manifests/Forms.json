@@ -1,0 +1,9 @@
+{
+	"source": "tatter/forms/assets",
+	"destination": "vendor/forms",
+	"resources": [
+		{
+			"source": "."
+		}
+	]
+}
