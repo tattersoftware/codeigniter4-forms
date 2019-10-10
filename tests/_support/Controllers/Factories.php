@@ -4,5 +4,5 @@ use Tatter\Forms\Controllers\ResourcePresenter;
 
 class Factories extends ResourcePresenter
 {
-	protected $modelName = 'ModuleTests\Support\FactoryModel';
+	protected $modelName = 'ModuleTests\Support\Models\FactoryModel';
 }

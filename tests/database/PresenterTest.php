@@ -5,10 +5,6 @@
  * tests/system/RESTful/ResourcePresenterTest.php
  * tests/system/RESTful/ResourceControllerTest.php
  */
- 
-use CodeIgniter\Config\Services;
-use Config\App;
-use Tests\Support\MockCodeIgniter;
 
 class PresenterTest extends ModuleTests\Support\DatabaseTestCase
 {

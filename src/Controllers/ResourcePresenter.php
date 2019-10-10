@@ -3,7 +3,7 @@
 use CodeIgniter\HTTP\RedirectResponse;
 use Tatter\Forms\Traits\ResourceTrait;
 
-class ResourcePresenter extends \CodeIgniter\RESTful\ResourcePresenter;
+class ResourcePresenter extends \CodeIgniter\RESTful\ResourcePresenter
 {
 	use ResourceTrait;
 	

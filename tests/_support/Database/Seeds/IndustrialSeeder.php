@@ -1,6 +1,6 @@
 <?php namespace ModuleTests\Support\Database\Seeds;
 
-class ExampleSeeder extends \CodeIgniter\Database\Seeder
+class IndustrialSeeder extends \CodeIgniter\Database\Seeder
 {
 	public function run()
 	{

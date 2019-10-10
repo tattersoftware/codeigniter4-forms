@@ -1,4 +1,8 @@
 <?php namespace ModuleTests\Support;
+ 
+use CodeIgniter\Config\Services;
+use Config\App;
+use Tests\Support\MockCodeIgniter;
 
 class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
 {
