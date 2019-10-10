@@ -36,7 +36,7 @@ may vary):
 <script>
 	var baseUrl = "<?= base_url() ?>";
 	var siteUrl = "<?= site_url() ?>";
-	var apiUrl  = "<?= config('forms')->apiUrl ?>";
+	var apiUrl  = "<?= site_url(config('forms')->apiUrl) ?>";
 </script>
 ```
 

@@ -17,5 +17,5 @@ class Forms extends \Tatter\Forms\Config\Forms
 	public $silent = true;
 
 	// URL base for Resource controllers
-	public $apiUrl = site_url('api/');
+	public $apiUrl = 'api/';
 }
