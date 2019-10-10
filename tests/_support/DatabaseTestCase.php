@@ -14,7 +14,7 @@ class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
      *
      * @var string
      */
-    protected $seed = 'ModuleTests\Support\Database\Seeds\ExampleSeeder';
+    protected $seed = 'ModuleTests\Support\Database\Seeds\IndustrialSeeder';
 
     /**
      * The path to where we can find the test Seeds directory.
@@ -29,9 +29,53 @@ class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
      * @var string
      */
     protected $namespace = 'ModuleTests\Support';
+    
+	/**
+	 * @var \CodeIgniter\CodeIgniter
+	 */
+	protected $codeigniter;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
+	/**
+	 *
+	 * @var \CodeIgniter\Router\RoutesCollection
+	 */
+	protected $routes;
+
+	/**
+	 *
+	 * @var \Tatter\Forms\Config\Forms
+	 */
+	protected $config;
+
+	protected function setUp(): void
+	{
+		parent::setUp();
+
+		Services::reset();
+
+		$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+
+		// Inject mock router.
+		$this->routes = Services::routes();
+		
+		$this->routes->presenter('factories', ['controller' => 'ModuleTests\Support\Controllers\Factories']);
+		$this->routes->resource('api/factories', ['controller' => 'ModuleTests\Support\Controllers\API\Factories']);
+		
+		Services::injectMock('routes', $this->routes);
+
+		$config            = new App();
+		$this->codeigniter = new MockCodeIgniter($config);
+		
+		$this->config = new \Tatter\Forms\Config\Forms();
+	}
+
+	public function tearDown(): void
+	{
+		parent::tearDown();
+
+		if (count(ob_list_handlers()) > 1)
+		{
+			ob_end_clean();
+		}
+	}
 }
