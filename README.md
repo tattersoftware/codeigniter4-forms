@@ -93,7 +93,7 @@ for each resource (where {names} is the plural of your resource name):
 
 As you can see **Forms** expects some views that are part of a full page load layout and
 some that can be injected into an existing page via AJAX (e.g. in a modal). See
-[examples/](examples/) for a full set of example views.
+[examples](examples/Views/) for a full set of example view files.
 
 ### Controllers
 
@@ -140,6 +140,13 @@ $routes->resource('api/rewards', ['controller' => 'App\Controllers\API\Rewards']
 
 By default your resource controller routes will all be prefixed "api/", but you can change
 this in your config file.
+
+### JavaScript
+
+**Forms** includes a light set of JavaScript commands for passing data between your views
+and controllers and auto-handling AJAX requests. If you want a more complete set of functions,
+or fully automated object handler you will want to include your own third-party tools and
+implement them in your view files.
 
 ## Appendix
 
