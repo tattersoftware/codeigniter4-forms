@@ -28,7 +28,7 @@ class ResourcePresenter extends \CodeIgniter\RESTful\ResourcePresenter
 			return $this->actionFailed('create');
 		}
 
-		alert('success', lang('Forms.created', [$this->name]));
+		$this->alert('success', lang('Forms.created', [$this->name]));
 		
 		return redirect()->to($this->names);
 	}
@@ -80,7 +80,7 @@ class ResourcePresenter extends \CodeIgniter\RESTful\ResourcePresenter
 			return $this->actionFailed('update');
 		}
 		
-		alert('success', lang('Forms.updated', [$this->name]));
+		$this->alert('success', lang('Forms.updated', [$this->name]));
 		
 		return redirect()->to("{$this->names}/{$id}");
 	}
@@ -124,7 +124,7 @@ class ResourcePresenter extends \CodeIgniter\RESTful\ResourcePresenter
 		
 		$error = lang('Forms.notFound', [$this->name]);
 
-		alert('danger', $error);
+		$this->alert('danger', $error);
 
 		return redirect()->back()->withInput()->with('errors', [$error]);
 	}
@@ -135,9 +135,17 @@ class ResourcePresenter extends \CodeIgniter\RESTful\ResourcePresenter
 
 		foreach ($errors as $error)
 		{
-			alert('warning', $error);
+			$this->alert('warning', $error);
 		}
 		
 		return redirect()->back()->withInput()->with('errors', $errors);
+	}
+	
+	protected function alert($status, $message)
+	{
+		if ($alerts = service('alerts'))
+		{
+			$alerts->add($status, $message);
+		}
 	}
 }

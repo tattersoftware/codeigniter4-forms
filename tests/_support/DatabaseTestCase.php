@@ -1,8 +1,10 @@
 <?php namespace ModuleTests\Support;
  
 use CodeIgniter\Config\Services;
+use CodeIgniter\Session\Handlers\ArrayHandler;
 use Config\App;
 use Tests\Support\MockCodeIgniter;
+use Tests\Support\Session\MockSession;
 
 class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
 {
@@ -55,12 +57,12 @@ class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
 	{
 		parent::setUp();
 
-		// Load the helpers (mocked codeignter can't find it)
-		helper(['alerts', 'inflector']);
+		// Load resource that mocked codeignter can't find				
+		helper(['inflector']);
 		
 		Services::reset();
-
-		$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+		
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
 
 		// Inject mock router
 		$this->routes = Services::routes();
@@ -70,13 +72,17 @@ class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
 		
 		Services::injectMock('routes', $this->routes);
 
-		// Inject mock router
-		$view = Services::renderer(MODULESUPPORTPATH . 'Views');
-		Services::injectMock('renderer', $view);
+		// Inject mock renderer
+		$config = new \Config\View();
+		$viewPath = config('Paths')->viewDirectory;
+		$renderer = new MockRenderer($config, $viewPath, Services::locator(true), CI_DEBUG, Services::logger(true));
+		Services::injectMock('renderer', $renderer);
 		
-		$config            = new App();
+		// Mock framework
+        $config = config('App');
 		$this->codeigniter = new MockCodeIgniter($config);
 		
+		// Module classes
 		$this->config = new \Tatter\Forms\Config\Forms();
 		$this->model  = new \ModuleTests\Support\Models\FactoryModel();
 	}
