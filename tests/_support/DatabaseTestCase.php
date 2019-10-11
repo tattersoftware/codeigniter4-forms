@@ -55,11 +55,14 @@ class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
 	{
 		parent::setUp();
 
+		// Load the helpers (mocked codeignter can't find it)
+		helper(['alerts', 'inflector']);
+		
 		Services::reset();
 
 		$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
 
-		// Inject mock router.
+		// Inject mock router
 		$this->routes = Services::routes();
 		
 		$this->routes->presenter('factories', ['controller' => 'ModuleTests\Support\Controllers\Factories']);
@@ -67,10 +70,15 @@ class DatabaseTestCase extends \CodeIgniter\Test\CIDatabaseTestCase
 		
 		Services::injectMock('routes', $this->routes);
 
+		// Inject mock router
+		$view = Services::renderer(MODULESUPPORTPATH . 'Views');
+		Services::injectMock('renderer', $view);
+		
 		$config            = new App();
 		$this->codeigniter = new MockCodeIgniter($config);
 		
 		$this->config = new \Tatter\Forms\Config\Forms();
+		$this->model  = new \ModuleTests\Support\Models\FactoryModel();
 	}
 
 	public function tearDown(): void
