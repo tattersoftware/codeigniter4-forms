@@ -1,7 +1,7 @@
 <?php
 
 /* Tatter/Forms Tests
- * Adapted from CodeIgniter 4 framefactories tests
+ * Adapted from CodeIgniter 4 RESTful tests
  * tests/system/RESTful/ResourcePresenterTest.php
  * tests/system/RESTful/ResourceControllerTest.php
  */
@@ -195,16 +195,20 @@ class PresenterTest extends ModuleTests\Support\DatabaseTestCase
 		$_SERVER['argc']           = 4;
 		$_SERVER['REQUEST_URI']    = '/factories/update/1';
 		$_SERVER['REQUEST_METHOD'] = 'POST';
+		
+		$_POST['name']    = 'Rainbow Factory';
+		$_POST['uid']     = 'bow';
+		$_POST['class']   = 'ModuleTests\Rainbows\Factory';
+		$_POST['icon']    = '';
+		$_POST['summary'] = '';
 
 		ob_start();
 		$this->codeigniter->useSafeOutput(true)->run($this->routes);
-		$output = unserialize(ob_get_clean());
+		$output = ob_get_clean();
+				
+		$this->assertEquals('', $output);
 		
-		$expected = [
-			'view' => 'factories/update',
-			'data' => [],
-		];
-		
-		$this->assertEquals($expected, $output);
+		$factory = $this->model->find(1);
+		$this->assertEquals($_POST['name'], $factory->name);	
 	}
 }
