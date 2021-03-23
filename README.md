@@ -1,6 +1,10 @@
 # Tatter\Forms
 RESTful AJAX forms for CodeIgniter 4
 
+[![](https://github.com/tattersoftware/codeigniter4-forms/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-forms/actions?query=workflow%3A%22PHPUnit)
+[![](https://github.com/tattersoftware/codeigniter4-forms/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-forms/actions?query=workflow%3A%22PHPStan)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-forms/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-forms?branch=develop)
+
 ## Quick Start
 
 1. Install with Composer: `> composer require tatter/forms`
@@ -46,7 +50,7 @@ may vary):
 ## Configuration (optional)
 
 The library's default behavior can be overridden or augment by its config file. Copy
-**bin/Forms.php** to **app/Config/Forms.php** and follow the instructions in the
+**examples/Forms.php** to **app/Config/Forms.php** and follow the instructions in the
 comments. If no config file is found the library will use its defaults.
 
 ## Usage
