@@ -6,8 +6,12 @@
  * tests/system/RESTful/ResourceControllerTest.php
  */
 
-class ControllerTest extends ModuleTests\Support\DatabaseTestCase
+use CodeIgniter\Test\DatabaseTestTrait;
+use Tests\Support\FormsTestCase;
+
+class ControllerTest extends FormsTestCase
 {
+	use DatabaseTestTrait;
 
 	public function testResourceGet()
 	{

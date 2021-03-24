@@ -10,6 +10,7 @@ parameters:
 		- src/Config/Routes.php
 		- src/Views/*
 	ignoreErrors:
+		- '#Cannot access property \$[A-Za-z]+ on array\|object#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- Faker\Generator

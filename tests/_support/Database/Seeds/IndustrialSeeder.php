@@ -1,6 +1,8 @@
-<?php namespace ModuleTests\Support\Database\Seeds;
+<?php namespace Tests\Support\Database\Seeds;
 
-class IndustrialSeeder extends \CodeIgniter\Database\Seeder
+use CodeIgniter\Database\Seeder;
+
+class IndustrialSeeder extends Seeder
 {
 	public function run()
 	{
