@@ -1,13 +1,17 @@
 <?php namespace Tatter\Forms\Controllers;
 
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\RESTful\ResourceController as BaseController;
 use Tatter\Forms\Traits\ResourceTrait;
 
-class ResourceController extends \CodeIgniter\RESTful\ResourceController
+class ResourceController extends BaseController
 {
 	use ResourceTrait;
 
-	/************* CRUD METHODS *************/
+	//--------------------------------------------------------------------
+	// CRUD Methods
+	//--------------------------------------------------------------------
 	
 	public function create()
 	{
@@ -68,7 +72,9 @@ class ResourceController extends \CodeIgniter\RESTful\ResourceController
 		return $this->respondDeleted(null, lang('Forms.deleted', [$this->name]));
 	}
 	
-	/************* SUPPORT METHODS *************/
+	//--------------------------------------------------------------------
+	// Support Methods
+	//--------------------------------------------------------------------
 	
 	protected function ensureExists($id = null)
 	{
@@ -90,6 +96,6 @@ class ResourceController extends \CodeIgniter\RESTful\ResourceController
 			'messages' => $this->model->errors(),
 		];
 		
-		return $this->respond($response, $status, $message);
+		return $this->respond($response, $status);
 	}
 }

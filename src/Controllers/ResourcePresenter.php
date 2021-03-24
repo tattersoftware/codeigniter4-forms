@@ -1,9 +1,10 @@
 <?php namespace Tatter\Forms\Controllers;
 
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\RESTful\ResourcePresenter as BasePresenter;
 use Tatter\Forms\Traits\ResourceTrait;
 
-class ResourcePresenter extends \CodeIgniter\RESTful\ResourcePresenter
+class ResourcePresenter extends BasePresenter
 {
 	use ResourceTrait;
 	

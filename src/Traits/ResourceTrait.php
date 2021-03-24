@@ -1,7 +1,12 @@
 <?php namespace Tatter\Forms\Traits;
 
+use CodeIgniter\Model;
 use Tatter\Forms\Exceptions\FormsException;
 
+/**
+ * @property Model $model
+ * @mixin Tatter\Forms\Controllers\ResourcePresenter, Tatter\Forms\Controllers\ResourceController
+ */
 trait ResourceTrait
 {
 	// Convenience singular & plural names for entity variables
@@ -14,7 +19,7 @@ trait ResourceTrait
 		parent::setModel($which);
 
 		// Ensure we received a valid model
-		if (! $this->model instanceof \CodeIgniter\Model)
+		if (! $this->model instanceof Model)
 		{
 			throw FormsException::forMissingModel(get_class($this));
 		}
