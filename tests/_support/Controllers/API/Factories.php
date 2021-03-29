@@ -1,4 +1,4 @@
-<?php namespace ModuleTests\Support\Controllers\API;
+<?php namespace Tests\Support\Controllers\API;
 
 use Tatter\Forms\Controllers\ResourceController;
 use Tests\Support\Models\FactoryModel;

@@ -73,10 +73,6 @@ class FormsTestCase extends CIUnitTestCase
 		
 		Services::injectMock('routes', $routes);
 		$this->routes = $routes;
-
-		// Mock the renderer
-		$renderer = new MockRenderer(config('View'), config('Paths')->viewDirectory, Services::locator(true), CI_DEBUG, Services::logger(true));
-		Services::injectMock('renderer', $renderer);
 		
 		// Load the test classes
 		$this->config      = config('Forms');

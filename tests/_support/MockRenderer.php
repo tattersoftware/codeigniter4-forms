@@ -15,6 +15,6 @@ class MockRenderer extends View
 	 */
 	public function render(string $view, array $options = null, bool $saveData = null): string
 	{
-		return serialize(['view' => $view, 'data' => $this->data]);
+		return serialize(['view' => $view, 'data' => $this->tempData]);
 	}
 }
