@@ -1,8 +1,9 @@
-<?php namespace ModuleTests\Support\Controllers;
+<?php namespace Tests\Support\Controllers;
 
 use Tatter\Forms\Controllers\ResourcePresenter;
+use Tests\Support\Models\FactoryModel;
 
 class Factories extends ResourcePresenter
 {
-	protected $modelName = 'ModuleTests\Support\Models\FactoryModel';
+	protected $modelName = FactoryModel::class;
 }

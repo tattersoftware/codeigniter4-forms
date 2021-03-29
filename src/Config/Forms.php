@@ -4,9 +4,18 @@ use CodeIgniter\Config\BaseConfig;
 
 class Forms extends BaseConfig
 {
-	// Whether to continue instead of throwing exceptions
+	/**
+	 * Whether to continue instead of throwing exceptions
+	 *
+	 * @var bool
+	 */
 	public $silent = true;
 
-	// URL base for Resource controllers
+
+	/**
+	 * URL base for Resource controllers
+	 *
+	 * @var string
+	 */
 	public $apiUrl = 'api/';
 }

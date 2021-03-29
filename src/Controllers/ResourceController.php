@@ -1,14 +1,18 @@
 <?php namespace Tatter\Forms\Controllers;
 
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\RESTful\ResourceController as BaseController;
 use Tatter\Forms\Traits\ResourceTrait;
 
-class ResourceController extends \CodeIgniter\RESTful\ResourceController
+class ResourceController extends BaseController
 {
 	use ResourceTrait;
 
-	/************* CRUD METHODS *************/
-	
+	//--------------------------------------------------------------------
+	// CRUD Methods
+	//--------------------------------------------------------------------
+
 	public function create()
 	{
 		$data = $this->request->getPost();
@@ -18,14 +22,14 @@ class ResourceController extends \CodeIgniter\RESTful\ResourceController
 			return $this->actionFailed('create', 422);
 		}
 
-		return $this->respondCreated(null, lang('Forms.created', [$this->name]));
+		return $this->respondCreated($this->model->find($id), lang('Forms.created', [ucfirst($this->name)]));
 	}
 
 	public function index()
 	{
 		return $this->respond($this->model->findAll());
 	}
-	
+
 	public function show($id = null)
 	{
 		if (($object = $this->ensureExists($id)) instanceof ResponseInterface)
@@ -33,9 +37,9 @@ class ResourceController extends \CodeIgniter\RESTful\ResourceController
 			return $object;
 		}
 
-		return $this->respond([$this->model->find($id)]);
+		return $this->respond($object);
 	}
-	
+
 	public function update($id = null)
 	{
 		if (($object = $this->ensureExists($id)) instanceof ResponseInterface)
@@ -50,7 +54,7 @@ class ResourceController extends \CodeIgniter\RESTful\ResourceController
 			return $this->actionFailed('update', 422);
 		}
 
-		return $this->respond(null, 200, lang('Forms.updated', [$this->name]));
+		return $this->respond($this->model->find($id), 200, lang('Forms.updated', [ucfirst($this->name)]));
 	}
 
 	public function delete($id = null)
@@ -59,37 +63,54 @@ class ResourceController extends \CodeIgniter\RESTful\ResourceController
 		{
 			return $object;
 		}
-		
+
 		if (! $this->model->delete($id))
 		{
 			return $this->actionFailed('delete');
 		}
 
-		return $this->respondDeleted(null, lang('Forms.deleted', [$this->name]));
+		return $this->respondDeleted($object, lang('Forms.deleted', [ucfirst($this->name)]));
 	}
-	
-	/************* SUPPORT METHODS *************/
-	
+
+	//--------------------------------------------------------------------
+	// Support Methods
+	//--------------------------------------------------------------------
+
+	/**
+	 * Fetches an object or returns a failure Response.
+	 *
+	 * @param string|int|null $id
+	 *
+	 * @return mixed
+	 */
 	protected function ensureExists($id = null)
 	{
-		if ($object = $this->model->find($id))
+		if (isset($id) && $object = $this->model->find($id))
 		{
 			return $object;
 		}
-		
-		return $this->failNotFound('Not Found', null, lang('Forms.notFound', [$this->name]));
+
+		return $this->failNotFound('Not Found', null, lang('Forms.notFound', [ucfirst($this->name)]));
 	}
 
+	/**
+	 * Creates a standardized failure Response.
+	 *
+	 * @param string $action
+	 * @param int $status
+	 *
+	 * @return ResponseInterface
+	 */
 	protected function actionFailed(string $action, int $status = 400)
 	{
-		$errors = $this->model->errors() ?? [lang("Forms.{$action}Failed", [$this->name])];
+		$errors = $this->model->errors() ?? [lang("Forms.{$action}Failed", [ucfirst($this->name)])];
 
 		$response = [
 			'status'   => $status,
-			'error'    => "{$action} Failed",
+			'error'    => ucfirst($action) . ' Failed',
 			'messages' => $this->model->errors(),
 		];
-		
-		return $this->respond($response, $status, $message);
+
+		return $this->respond($response, $status);
 	}
 }

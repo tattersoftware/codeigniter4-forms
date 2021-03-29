@@ -6,7 +6,7 @@ return [
 	'created'       => 'New {0} created successfully.',
 	'updated'       => '{0} updated successfully.',
 	'deleted'       => '{0} deleted successfully.',
-	'updateFailed'  => 'Unable to create a new {0}.',
+	'createFailed'  => 'Unable to create a new {0}.',
 	'updateFailed'  => 'Unable to update that {0}.',
 	'deleteFailed'  => 'Unable to delete that {0}.',
 ];
