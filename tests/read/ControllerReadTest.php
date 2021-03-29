@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Controller;
 use CodeIgniter\Test\ControllerTester;
 use CodeIgniter\Test\DatabaseTestTrait;
 use Tests\Support\Controllers\API\Factories;
@@ -12,6 +13,8 @@ use Tests\Support\Models\FactoryModel;
  * Tests that do not change the database
  * so can afford the optimization of
  * setting up the database once.
+ *
+ * @property Factories $controller
  */
 class ControllerReadTest extends FormsTestCase
 {

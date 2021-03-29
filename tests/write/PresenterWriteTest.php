@@ -51,6 +51,8 @@ class PresenterWriteTest extends FormsTestCase
 				'text'  => 'New factory created successfully.',
 			],
 		];
+
+		// @phpstan-ignore-next-line  Remove after https://github.com/codeigniter4/CodeIgniter4/pull/4503
 		$result->assertSessionHas('alerts-queue', $expected);
 	}
 

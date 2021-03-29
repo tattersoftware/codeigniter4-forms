@@ -1,5 +1,7 @@
 <?php namespace Tests\Support;
 
+use CodeIgniter\Controller;
+use CodeIgniter\HTTP\Request;
 use CodeIgniter\Test\ControllerTester;
 use Config\Services;
 
@@ -12,6 +14,8 @@ use Config\Services;
  * processing their views.
  *
  * @mixin FormsTestCase
+ *
+ * @property Request $request  Remove after https://github.com/codeigniter4/CodeIgniter4/pull/4503
  */
 trait PresenterTrait
 {
