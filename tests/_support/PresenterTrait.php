@@ -20,38 +20,38 @@ use Config\Services;
  */
 trait PresenterTrait
 {
-	use ControllerTestTrait;
+    use ControllerTestTrait;
 
-	/**
-	 * Initializes routing and config.
-	 */
-	protected function setUpPresenterTrait(): void
-	{
-		// Mock the renderer
-		Services::injectMock('renderer', new MockRenderer(config('View')));
-	}
+    /**
+     * Initializes routing and config.
+     */
+    protected function setUpPresenterTrait(): void
+    {
+        // Mock the renderer
+        Services::injectMock('renderer', new MockRenderer(config('View')));
+    }
 
-	/**
-	 * Executes a method call and returns
-	 * its PresenterResponse.
-	 *
-	 * @param array $params
-	 */
-	protected function call(string $method, ...$params): PresenterResponse
-	{
-		return new PresenterResponse($this->execute($method, ...$params));
-	}
+    /**
+     * Executes a method call and returns
+     * its PresenterResponse.
+     *
+     * @param array $params
+     */
+    protected function call(string $method, ...$params): PresenterResponse
+    {
+        return new PresenterResponse($this->execute($method, ...$params));
+    }
 
-	/**
-	 * Sets the headers to trigger the next call
-	 * as an AJAX method.
-	 *
-	 * @return $this
-	 */
-	protected function asAjax(): self
-	{
-		$this->request->setHeader('X-Requested-With', 'xmlhttprequest');
+    /**
+     * Sets the headers to trigger the next call
+     * as an AJAX method.
+     *
+     * @return $this
+     */
+    protected function asAjax(): self
+    {
+        $this->request->setHeader('X-Requested-With', 'xmlhttprequest');
 
-		return $this;
-	}
+        return $this;
+    }
 }

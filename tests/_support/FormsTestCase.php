@@ -12,12 +12,12 @@ use Tests\Support\Models\FactoryModel;
 
 abstract class FormsTestCase extends CIUnitTestCase
 {
-	/**
-	 * The namespace to help us find the migration classes.
-	 *
-	 * @var string
-	 */
-	protected $namespace = 'Tests\Support';
+    /**
+     * The namespace to help us find the migration classes.
+     *
+     * @var string
+     */
+    protected $namespace = 'Tests\Support';
 
     /**
      * The name of a seed file used for all tests within this test case.
@@ -26,59 +26,59 @@ abstract class FormsTestCase extends CIUnitTestCase
      */
     protected $seed = IndustrialSeeder::class;
 
-	/**
-	 * @var RouteCollection
-	 */
-	protected $routes;
+    /**
+     * @var RouteCollection
+     */
+    protected $routes;
 
-	/**
-	 * @var FormsConfig
-	 */
-	protected $config;
+    /**
+     * @var FormsConfig
+     */
+    protected $config;
 
-	/**
-	 * @var FactoryModel
-	 */
-	protected $model;
+    /**
+     * @var FactoryModel
+     */
+    protected $model;
 
-	/**
-	 * @var MockCodeIgniter
-	 */
-	protected $codeigniter;
+    /**
+     * @var MockCodeIgniter
+     */
+    protected $codeigniter;
 
-	/**
-	 * Initializes required helpers.
-	 *
-	 * @see app/Config/Events.php "post_controller_constructor"
-	 */
-	public static function setUpBeforeClass(): void
-	{
-		parent::setUpBeforeClass();
+    /**
+     * Initializes required helpers.
+     *
+     * @see app/Config/Events.php "post_controller_constructor"
+     */
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
 
-		helper(['inflector']);
-	}
+        helper(['inflector']);
+    }
 
-	/**
-	 * Initializes routing and config.
-	 */
-	protected function setUp(): void
-	{
-		parent::setUp();
+    /**
+     * Initializes routing and config.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
 
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
 
-		// Set up Routes
-		$routes = Services::routes();
+        // Set up Routes
+        $routes = Services::routes();
 
-		$routes->presenter('factories', ['controller' => 'Tests\Support\Controllers\Factories']);
-		$routes->resource('api/factories', ['controller' => 'Tests\Support\Controllers\API\Factories']);
+        $routes->presenter('factories', ['controller' => 'Tests\Support\Controllers\Factories']);
+        $routes->resource('api/factories', ['controller' => 'Tests\Support\Controllers\API\Factories']);
 
-		Services::injectMock('routes', $routes);
-		$this->routes = $routes;
+        Services::injectMock('routes', $routes);
+        $this->routes = $routes;
 
-		// Load the test classes
-		$this->config      = config('Forms');
-		$this->model       = new FactoryModel();
-		$this->codeigniter = new MockCodeIgniter(config('App'));
-	}
+        // Load the test classes
+        $this->config      = config('Forms');
+        $this->model       = new FactoryModel();
+        $this->codeigniter = new MockCodeIgniter(config('App'));
+    }
 }

@@ -15,9 +15,9 @@ namespace Config;
 
 class Forms extends \Tatter\Forms\Config\Forms
 {
-	// Whether to continue instead of throwing exceptions
-	public $silent = true;
+    // Whether to continue instead of throwing exceptions
+    public $silent = true;
 
-	// URL base for Resource controllers
-	public $apiUrl = 'api/';
+    // URL base for Resource controllers
+    public $apiUrl = 'api/';
 }

@@ -7,5 +7,5 @@ use Tests\Support\Models\FactoryModel;
 
 class Factories extends ResourceController
 {
-	protected $modelName = FactoryModel::class;
+    protected $modelName = FactoryModel::class;
 }

@@ -17,103 +17,103 @@ use Tests\Support\PresenterTrait;
  */
 final class PresenterReadTest extends FormsTestCase
 {
-	use DatabaseTestTrait;
-	use PresenterTrait;
+    use DatabaseTestTrait;
+    use PresenterTrait;
 
-	protected $migrateOnce = true;
-	protected $seedOnce    = true;
+    protected $migrateOnce = true;
+    protected $seedOnce    = true;
 
-	/**
-	 * Sets up the Controller for testing.
-	 */
-	protected function setUp(): void
-	{
-		parent::setUp();
+    /**
+     * Sets up the Controller for testing.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-		$this->controller(Factories::class);
-	}
+        $this->controller(Factories::class);
+    }
 
-	public function testNew()
-	{
-		$result = $this->call('new');
-		$result->response->assertOK();
+    public function testNew()
+    {
+        $result = $this->call('new');
+        $result->response->assertOK();
 
-		$this->assertSame('factories/new', $result->view);
-	}
+        $this->assertSame('factories/new', $result->view);
+    }
 
-	public function testNewAjax()
-	{
-		$result = $this->asAjax()->call('new');
-		$result->response->assertOK();
+    public function testNewAjax()
+    {
+        $result = $this->asAjax()->call('new');
+        $result->response->assertOK();
 
-		$this->assertSame('factories/form', $result->view);
-	}
+        $this->assertSame('factories/form', $result->view);
+    }
 
-	public function testIndex()
-	{
-		$data = [
-			'factories' => model(FactoryModel::class)->findAll(),
-		];
+    public function testIndex()
+    {
+        $data = [
+            'factories' => model(FactoryModel::class)->findAll(),
+        ];
 
-		$result = $this->call('index');
-		$result->response->assertOK();
+        $result = $this->call('index');
+        $result->response->assertOK();
 
-		$this->assertSame('factories/index', $result->view);
-		$this->assertSame($data, $result->data);
-	}
+        $this->assertSame('factories/index', $result->view);
+        $this->assertEquals($data, $result->data);
+    }
 
-	public function testShow()
-	{
-		$factory = model(FactoryModel::class)->first();
+    public function testShow()
+    {
+        $factory = model(FactoryModel::class)->first();
 
-		$result = $this->call('show', $factory->id);
-		$result->response->assertOK();
+        $result = $this->call('show', $factory->id);
+        $result->response->assertOK();
 
-		$this->assertSame('factories/show', $result->view);
-		$this->assertSame(['factory' => $factory], $result->data);
-	}
+        $this->assertSame('factories/show', $result->view);
+        $this->assertEquals(['factory' => $factory], $result->data);
+    }
 
-	public function testEdit()
-	{
-		$factory = model(FactoryModel::class)->first();
+    public function testEdit()
+    {
+        $factory = model(FactoryModel::class)->first();
 
-		$result = $this->call('edit', $factory->id);
-		$result->response->assertOK();
+        $result = $this->call('edit', $factory->id);
+        $result->response->assertOK();
 
-		$this->assertSame('factories/edit', $result->view);
-		$this->assertSame(['factory' => $factory], $result->data);
-	}
+        $this->assertSame('factories/edit', $result->view);
+        $this->assertEquals(['factory' => $factory], $result->data);
+    }
 
-	public function testEditAjax()
-	{
-		$factory = model(FactoryModel::class)->first();
+    public function testEditAjax()
+    {
+        $factory = model(FactoryModel::class)->first();
 
-		$result = $this->asAjax()->call('edit', $factory->id);
-		$result->response->assertOK();
+        $result = $this->asAjax()->call('edit', $factory->id);
+        $result->response->assertOK();
 
-		$this->assertSame('factories/form', $result->view);
-		$this->assertSame(['factory' => $factory], $result->data);
-	}
+        $this->assertSame('factories/form', $result->view);
+        $this->assertEquals(['factory' => $factory], $result->data);
+    }
 
-	public function testRemove()
-	{
-		$factory = model(FactoryModel::class)->first();
+    public function testRemove()
+    {
+        $factory = model(FactoryModel::class)->first();
 
-		$result = $this->call('remove', $factory->id);
-		$result->response->assertOK();
+        $result = $this->call('remove', $factory->id);
+        $result->response->assertOK();
 
-		$this->assertSame('factories/remove', $result->view);
-		$this->assertSame(['factory' => $factory], $result->data);
-	}
+        $this->assertSame('factories/remove', $result->view);
+        $this->assertEquals(['factory' => $factory], $result->data);
+    }
 
-	public function testRemoveAjax()
-	{
-		$factory = model(FactoryModel::class)->first();
+    public function testRemoveAjax()
+    {
+        $factory = model(FactoryModel::class)->first();
 
-		$result = $this->asAjax()->call('remove', $factory->id);
-		$result->response->assertOK();
+        $result = $this->asAjax()->call('remove', $factory->id);
+        $result->response->assertOK();
 
-		$this->assertSame('factories/confirm', $result->view);
-		$this->assertSame(['factory' => $factory], $result->data);
-	}
+        $this->assertSame('factories/confirm', $result->view);
+        $this->assertEquals(['factory' => $factory], $result->data);
+    }
 }

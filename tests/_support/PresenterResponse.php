@@ -15,49 +15,46 @@ use Throwable;
  */
 class PresenterResponse
 {
-	/**
-	 * @var TestResponse
-	 */
-	public $response;
+    /**
+     * @var TestResponse
+     */
+    public $response;
 
-	/**
-	 * The View file that would have been called.
-	 *
-	 * @var string
-	 */
-	public $view;
+    /**
+     * The View file that would have been called.
+     *
+     * @var string
+     */
+    public $view;
 
-	/**
-	 * Any data which would have been passed to the View.
-	 *
-	 * @var array
-	 */
-	public $data;
+    /**
+     * Any data which would have been passed to the View.
+     *
+     * @var array
+     */
+    public $data;
 
-	/**
-	 * Extracts the body and saves results.
-	 */
-	public function __construct(TestResponse $response)
-	{
-		if (! $body = $response->response()->getBody())
-		{
-			throw new RuntimeException('Empty body from ' . $response->request()->uri);
-		}
+    /**
+     * Extracts the body and saves results.
+     */
+    public function __construct(TestResponse $response)
+    {
+        if (! $body = $response->response()->getBody()) {
+            throw new RuntimeException('Empty body from ' . $response->request()->uri);
+        }
 
-		try {
-			$result = unserialize($body);
-		} catch (Throwable $e)
-		{
-			throw new RuntimeException('Invalid response ' . $body, $e->getCode(), $e);
-		}
+        try {
+            $result = unserialize($body);
+        } catch (Throwable $e) {
+            throw new RuntimeException('Invalid response ' . $body, $e->getCode(), $e);
+        }
 
-		if (! is_array($result))
-		{
-			throw new RuntimeException('Indecipherable response ' . $body);
-		}
+        if (! is_array($result)) {
+            throw new RuntimeException('Indecipherable response ' . $body);
+        }
 
-		$this->response = $response;
-		$this->view     = $result['view'];
-		$this->data     = $result['data'];
-	}
+        $this->response = $response;
+        $this->view     = $result['view'];
+        $this->data     = $result['data'];
+    }
 }

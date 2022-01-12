@@ -7,5 +7,5 @@ use Tests\Support\Models\FactoryModel;
 
 class Factories extends ResourcePresenter
 {
-	protected $modelName = FactoryModel::class;
+    protected $modelName = FactoryModel::class;
 }
