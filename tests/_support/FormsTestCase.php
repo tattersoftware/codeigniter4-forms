@@ -8,7 +8,7 @@ use Tatter\Forms\Config\Forms as FormsConfig;
 use Tests\Support\Database\Seeds\IndustrialSeeder;
 use Tests\Support\Models\FactoryModel;
 
-class FormsTestCase extends CIUnitTestCase
+abstract class FormsTestCase extends CIUnitTestCase
 {
 	/**
 	 * The namespace to help us find the migration classes.

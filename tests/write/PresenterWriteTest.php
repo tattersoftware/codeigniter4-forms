@@ -52,7 +52,6 @@ class PresenterWriteTest extends FormsTestCase
 			],
 		];
 
-		// @phpstan-ignore-next-line  Remove after https://github.com/codeigniter4/CodeIgniter4/pull/4503
 		$result->assertSessionHas('alerts-queue', $expected);
 	}
 
