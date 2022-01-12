@@ -11,72 +11,74 @@ use Tests\Support\Models\FactoryModel;
  *
  * Tests that affect the database
  * so must be reset between methods.
+ *
+ * @internal
  */
-class ControllerWriteTest extends FormsTestCase
+final class ControllerWriteTest extends FormsTestCase
 {
-	use ControllerTestTrait;
-	use DatabaseTestTrait;
+    use ControllerTestTrait;
+    use DatabaseTestTrait;
 
-	/**
-	 * Sets up the Controller for testing.
-	 */
-	protected function setUp(): void
-	{
-		parent::setUp();
+    /**
+     * Sets up the Controller for testing.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-		$this->controller(Factories::class);
-	}
+        $this->controller(Factories::class);
+    }
 
-	public function testCreate()
-	{
-		$_POST = [
-			'name'    => 'Rainbow Factory',
-			'uid'     => 'bow',
-			'class'   => 'ModuleTests\Rainbows\Factory',
-			'icon'    => '',
-			'summary' => '',
-		];
+    public function testCreate()
+    {
+        $_POST = [
+            'name'    => 'Rainbow Factory',
+            'uid'     => 'bow',
+            'class'   => 'ModuleTests\Rainbows\Factory',
+            'icon'    => '',
+            'summary' => '',
+        ];
 
-		$result = $this->execute('create');
+        $result = $this->execute('create');
 
-		$result->assertOK();
-		$result->assertStatus(201);
-		$this->assertEquals('New Factory created successfully.', $result->response()->getReasonPhrase());
+        $result->assertOK();
+        $result->assertStatus(201);
+        $this->assertSame('New Factory created successfully.', $result->response()->getReasonPhrase());
 
-		// Get the last Factory to confirm the response
-		$factories = model(FactoryModel::class)->findAll();
-		$factory   = end($factories);
+        // Get the last Factory to confirm the response
+        $factories = model(FactoryModel::class)->findAll();
+        $factory   = end($factories);
 
-		$this->assertEquals($factory, json_decode($result->response()->getBody()));
-	}
+        $this->assertEquals($factory, json_decode($result->response()->getBody()));
+    }
 
-	public function testUpdate()
-	{
-		$factory = model(FactoryModel::class)->first();
+    public function testUpdate()
+    {
+        $factory = model(FactoryModel::class)->first();
 
-		$_POST = ['name' => 'Banana Factory'];
+        $_POST = ['name' => 'Banana Factory'];
 
-		$result = $this->execute('update', $factory->id);
+        $result = $this->execute('update', $factory->id);
 
-		$result->assertOK();
-		$result->assertStatus(200);
-		$this->assertEquals('Factory updated successfully.', $result->response()->getReasonPhrase());
+        $result->assertOK();
+        $result->assertStatus(200);
+        $this->assertSame('Factory updated successfully.', $result->response()->getReasonPhrase());
 
-		$factory = model(FactoryModel::class)->find($factory->id);
-		$this->assertEquals($factory, json_decode($result->response()->getBody()));
-	}
+        $factory = model(FactoryModel::class)->find($factory->id);
+        $this->assertEquals($factory, json_decode($result->response()->getBody()));
+    }
 
-	public function testDelete()
-	{
-		$factory = model(FactoryModel::class)->first();
+    public function testDelete()
+    {
+        $factory = model(FactoryModel::class)->first();
 
-		$result = $this->execute('delete', $factory->id);
+        $result = $this->execute('delete', $factory->id);
 
-		$result->assertOK();
-		$result->assertStatus(200);
-		$this->assertEquals('Factory deleted successfully.', $result->response()->getReasonPhrase());
+        $result->assertOK();
+        $result->assertStatus(200);
+        $this->assertSame('Factory deleted successfully.', $result->response()->getReasonPhrase());
 
-		$factory = model(FactoryModel::class)->find($factory->id);
-		$this->assertNull($factory);
-	}
+        $factory = model(FactoryModel::class)->find($factory->id);
+        $this->assertNull($factory);
+    }
 }

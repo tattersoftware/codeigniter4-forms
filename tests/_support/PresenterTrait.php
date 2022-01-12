@@ -1,6 +1,7 @@
-<?php namespace Tests\Support;
+<?php
 
-use CodeIgniter\Controller;
+namespace Tests\Support;
+
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\Test\ControllerTestTrait;
 use Config\Services;
@@ -15,45 +16,42 @@ use Config\Services;
  *
  * @mixin FormsTestCase
  *
- * @property Request $request  Remove after https://github.com/codeigniter4/CodeIgniter4/pull/4503
+ * @property Request $request Remove after https://github.com/codeigniter4/CodeIgniter4/pull/4503
  */
 trait PresenterTrait
 {
-	use ControllerTestTrait;
+    use ControllerTestTrait;
 
-	/**
-	 * Initializes routing and config.
-	 */
-	protected function setUpPresenterTrait(): void
-	{
-		// Mock the renderer
-		Services::injectMock('renderer', new MockRenderer(config('View')));
-	}
+    /**
+     * Initializes routing and config.
+     */
+    protected function setUpPresenterTrait(): void
+    {
+        // Mock the renderer
+        Services::injectMock('renderer', new MockRenderer(config('View')));
+    }
 
-	/**
-	 * Executes a method call and returns
-	 * its PresenterResponse.
-	 *
-	 * @param string $method
-	 * @param array  $params
-	 *
-	 * @return PresenterResponse
-	 */
-	protected function call(string $method, ...$params): PresenterResponse
-	{
-		return new PresenterResponse($this->execute($method, ...$params));
-	}
+    /**
+     * Executes a method call and returns
+     * its PresenterResponse.
+     *
+     * @param array $params
+     */
+    protected function call(string $method, ...$params): PresenterResponse
+    {
+        return new PresenterResponse($this->execute($method, ...$params));
+    }
 
-	/**
-	 * Sets the headers to trigger the next call
-	 * as an AJAX method.
-	 *
-	 * @return $this
-	 */
-	protected function asAjax(): self
-	{
-		$this->request->setHeader('X-Requested-With', 'xmlhttprequest');
+    /**
+     * Sets the headers to trigger the next call
+     * as an AJAX method.
+     *
+     * @return $this
+     */
+    protected function asAjax(): self
+    {
+        $this->request->setHeader('X-Requested-With', 'xmlhttprequest');
 
-		return $this;
-	}
+        return $this;
+    }
 }
