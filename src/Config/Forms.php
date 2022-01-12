@@ -1,4 +1,6 @@
-<?php namespace Tatter\Forms\Config;
+<?php
+
+namespace Tatter\Forms\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -10,7 +12,6 @@ class Forms extends BaseConfig
 	 * @var bool
 	 */
 	public $silent = true;
-
 
 	/**
 	 * URL base for Resource controllers

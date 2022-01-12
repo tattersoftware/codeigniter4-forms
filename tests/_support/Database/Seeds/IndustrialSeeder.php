@@ -1,4 +1,6 @@
-<?php namespace Tests\Support\Database\Seeds;
+<?php
+
+namespace Tests\Support\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
@@ -27,11 +29,11 @@ class IndustrialSeeder extends Seeder
 				'class'   => 'Factories\Evil\MyFactory',
 				'icon'    => 'fas fa-book-dead',
 				'summary' => 'Abandon all hope, ye who enter here',
-			]
+			],
 		];
-		
+
 		$builder = $this->db->table('factories');
-		
+
 		foreach ($factories as $factory)
 		{
 			$builder->insert($factory);

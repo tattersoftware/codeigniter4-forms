@@ -3,8 +3,8 @@
 use CodeIgniter\Test\DatabaseTestTrait;
 use Tests\Support\Controllers\Factories;
 use Tests\Support\FormsTestCase;
-use Tests\Support\PresenterTrait;
 use Tests\Support\Models\FactoryModel;
+use Tests\Support\PresenterTrait;
 
 /**
  * ResourcePresenter Read Test Class
@@ -12,8 +12,10 @@ use Tests\Support\Models\FactoryModel;
  * Tests that do not change the database
  * so can afford the optimization of
  * setting up the database once.
+ *
+ * @internal
  */
-class PresenterReadTest extends FormsTestCase
+final class PresenterReadTest extends FormsTestCase
 {
 	use DatabaseTestTrait;
 	use PresenterTrait;
@@ -36,7 +38,7 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->call('new');
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/new', $result->view);
+		$this->assertSame('factories/new', $result->view);
 	}
 
 	public function testNewAjax()
@@ -44,7 +46,7 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->asAjax()->call('new');
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/form', $result->view);
+		$this->assertSame('factories/form', $result->view);
 	}
 
 	public function testIndex()
@@ -56,8 +58,8 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->call('index');
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/index', $result->view);
-		$this->assertEquals($data, $result->data);
+		$this->assertSame('factories/index', $result->view);
+		$this->assertSame($data, $result->data);
 	}
 
 	public function testShow()
@@ -67,8 +69,8 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->call('show', $factory->id);
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/show', $result->view);
-		$this->assertEquals(['factory' => $factory], $result->data);
+		$this->assertSame('factories/show', $result->view);
+		$this->assertSame(['factory' => $factory], $result->data);
 	}
 
 	public function testEdit()
@@ -78,8 +80,8 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->call('edit', $factory->id);
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/edit', $result->view);
-		$this->assertEquals(['factory' => $factory], $result->data);
+		$this->assertSame('factories/edit', $result->view);
+		$this->assertSame(['factory' => $factory], $result->data);
 	}
 
 	public function testEditAjax()
@@ -89,8 +91,8 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->asAjax()->call('edit', $factory->id);
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/form', $result->view);
-		$this->assertEquals(['factory' => $factory], $result->data);
+		$this->assertSame('factories/form', $result->view);
+		$this->assertSame(['factory' => $factory], $result->data);
 	}
 
 	public function testRemove()
@@ -100,8 +102,8 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->call('remove', $factory->id);
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/remove', $result->view);
-		$this->assertEquals(['factory' => $factory], $result->data);
+		$this->assertSame('factories/remove', $result->view);
+		$this->assertSame(['factory' => $factory], $result->data);
 	}
 
 	public function testRemoveAjax()
@@ -111,7 +113,7 @@ class PresenterReadTest extends FormsTestCase
 		$result = $this->asAjax()->call('remove', $factory->id);
 		$result->response->assertOK();
 
-		$this->assertEquals('factories/confirm', $result->view);
-		$this->assertEquals(['factory' => $factory], $result->data);
+		$this->assertSame('factories/confirm', $result->view);
+		$this->assertSame(['factory' => $factory], $result->data);
 	}
 }

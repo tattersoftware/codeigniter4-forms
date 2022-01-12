@@ -1,4 +1,6 @@
-<?php namespace Tests\Support;
+<?php
+
+namespace Tests\Support;
 
 use CodeIgniter\Test\TestResponse;
 use RuntimeException;
@@ -42,22 +44,20 @@ class PresenterResponse
 			throw new RuntimeException('Empty body from ' . $response->request()->uri);
 		}
 
-		try
-		{
+		try {
 			$result = unserialize($body);
-		}
-		catch (Throwable $e)
+		} catch (Throwable $e)
 		{
-			throw new RuntimeException('Invalid response ' . $body, $e->getCode(), $e);				
+			throw new RuntimeException('Invalid response ' . $body, $e->getCode(), $e);
 		}
 
 		if (! is_array($result))
 		{
-			throw new RuntimeException('Indecipherable response ' . $body);			
+			throw new RuntimeException('Indecipherable response ' . $body);
 		}
 
 		$this->response = $response;
 		$this->view     = $result['view'];
 		$this->data     = $result['data'];
-	}	
+	}
 }

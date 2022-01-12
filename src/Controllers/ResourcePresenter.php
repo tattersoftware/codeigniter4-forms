@@ -1,4 +1,6 @@
-<?php namespace Tatter\Forms\Controllers;
+<?php
+
+namespace Tatter\Forms\Controllers;
 
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\RESTful\ResourcePresenter as BasePresenter;
@@ -58,7 +60,7 @@ class ResourcePresenter extends BasePresenter
 		}
 
 		return view($this->request->isAJAX() ? "{$this->names}/form" : "{$this->names}/edit", [
-			$this->name => $object
+			$this->name => $object,
 		]);
 	}
 

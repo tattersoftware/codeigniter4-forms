@@ -15,8 +15,10 @@ use Tests\Support\Models\FactoryModel;
  * setting up the database once.
  *
  * @property Factories $controller
+ *
+ * @internal
  */
-class ControllerReadTest extends FormsTestCase
+final class ControllerReadTest extends FormsTestCase
 {
 	use ControllerTestTrait;
 	use DatabaseTestTrait;
@@ -139,8 +141,7 @@ class ControllerReadTest extends FormsTestCase
 	public function testDeleteFailed()
 	{
 		// Mock the Model so all deletes fail
-		$model = new class extends FactoryModel {
-		
+		$model = new class () extends FactoryModel {
 			protected function doDelete($id = null, bool $purge = false)
 			{
 				return false;

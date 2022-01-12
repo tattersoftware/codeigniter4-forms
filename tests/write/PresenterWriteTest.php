@@ -3,18 +3,20 @@
 use CodeIgniter\Test\DatabaseTestTrait;
 use Tests\Support\Controllers\Factories;
 use Tests\Support\FormsTestCase;
-use Tests\Support\PresenterTrait;
 use Tests\Support\Models\FactoryModel;
+use Tests\Support\PresenterTrait;
 
 /**
  * ResourcePresenter Write Test Class
  *
  * Tests that affect the database
  * so must be reset between methods.
+ *
+ * @internal
  */
-class PresenterWriteTest extends FormsTestCase
+final class PresenterWriteTest extends FormsTestCase
 {
-	use DatabaseTestTrait, PresenterTrait;
+	use DatabaseTestTrait; use PresenterTrait;
 
 	/**
 	 * Sets up the Controller for testing.
@@ -66,7 +68,7 @@ class PresenterWriteTest extends FormsTestCase
 		$result->assertRedirectTo('factories/' . $factory->id);
 
 		$factory = model(FactoryModel::class)->find($factory->id);
-		$this->assertEquals('Banana Factory', $factory->name);
+		$this->assertSame('Banana Factory', $factory->name);
 	}
 
 	public function testDelete()

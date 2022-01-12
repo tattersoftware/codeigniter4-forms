@@ -11,8 +11,10 @@ use Tests\Support\Models\FactoryModel;
  *
  * Tests that affect the database
  * so must be reset between methods.
+ *
+ * @internal
  */
-class ControllerWriteTest extends FormsTestCase
+final class ControllerWriteTest extends FormsTestCase
 {
 	use ControllerTestTrait;
 	use DatabaseTestTrait;
@@ -41,13 +43,13 @@ class ControllerWriteTest extends FormsTestCase
 
 		$result->assertOK();
 		$result->assertStatus(201);
-		$this->assertEquals('New Factory created successfully.', $result->response()->getReasonPhrase());
+		$this->assertSame('New Factory created successfully.', $result->response()->getReasonPhrase());
 
 		// Get the last Factory to confirm the response
 		$factories = model(FactoryModel::class)->findAll();
 		$factory   = end($factories);
 
-		$this->assertEquals($factory, json_decode($result->response()->getBody()));
+		$this->assertSame($factory, json_decode($result->response()->getBody()));
 	}
 
 	public function testUpdate()
@@ -60,10 +62,10 @@ class ControllerWriteTest extends FormsTestCase
 
 		$result->assertOK();
 		$result->assertStatus(200);
-		$this->assertEquals('Factory updated successfully.', $result->response()->getReasonPhrase());
+		$this->assertSame('Factory updated successfully.', $result->response()->getReasonPhrase());
 
 		$factory = model(FactoryModel::class)->find($factory->id);
-		$this->assertEquals($factory, json_decode($result->response()->getBody()));
+		$this->assertSame($factory, json_decode($result->response()->getBody()));
 	}
 
 	public function testDelete()
@@ -74,7 +76,7 @@ class ControllerWriteTest extends FormsTestCase
 
 		$result->assertOK();
 		$result->assertStatus(200);
-		$this->assertEquals('Factory deleted successfully.', $result->response()->getReasonPhrase());
+		$this->assertSame('Factory deleted successfully.', $result->response()->getReasonPhrase());
 
 		$factory = model(FactoryModel::class)->find($factory->id);
 		$this->assertNull($factory);

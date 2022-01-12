@@ -1,6 +1,7 @@
-<?php namespace Tatter\Forms\Controllers;
+<?php
 
-use CodeIgniter\HTTP\RedirectResponse;
+namespace Tatter\Forms\Controllers;
+
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController as BaseController;
 use Tatter\Forms\Traits\ResourceTrait;
@@ -79,7 +80,7 @@ class ResourceController extends BaseController
 	/**
 	 * Fetches an object or returns a failure Response.
 	 *
-	 * @param string|int|null $id
+	 * @param int|string|null $id
 	 *
 	 * @return mixed
 	 */
@@ -95,9 +96,6 @@ class ResourceController extends BaseController
 
 	/**
 	 * Creates a standardized failure Response.
-	 *
-	 * @param string $action
-	 * @param int $status
 	 *
 	 * @return ResponseInterface
 	 */

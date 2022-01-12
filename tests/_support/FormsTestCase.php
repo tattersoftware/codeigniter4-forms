@@ -1,4 +1,6 @@
-<?php namespace Tests\Support;
+<?php
+
+namespace Tests\Support;
 
 use CodeIgniter\Router\RouteCollection;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -67,13 +69,13 @@ abstract class FormsTestCase extends CIUnitTestCase
 
 		// Set up Routes
 		$routes = Services::routes();
-		
+
 		$routes->presenter('factories', ['controller' => 'Tests\Support\Controllers\Factories']);
 		$routes->resource('api/factories', ['controller' => 'Tests\Support\Controllers\API\Factories']);
-		
+
 		Services::injectMock('routes', $routes);
 		$this->routes = $routes;
-		
+
 		// Load the test classes
 		$this->config      = config('Forms');
 		$this->model       = new FactoryModel();

@@ -1,6 +1,7 @@
-<?php namespace Tests\Support;
+<?php
 
-use CodeIgniter\Controller;
+namespace Tests\Support;
+
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\Test\ControllerTestTrait;
 use Config\Services;
@@ -15,7 +16,7 @@ use Config\Services;
  *
  * @mixin FormsTestCase
  *
- * @property Request $request  Remove after https://github.com/codeigniter4/CodeIgniter4/pull/4503
+ * @property Request $request Remove after https://github.com/codeigniter4/CodeIgniter4/pull/4503
  */
 trait PresenterTrait
 {
@@ -34,10 +35,7 @@ trait PresenterTrait
 	 * Executes a method call and returns
 	 * its PresenterResponse.
 	 *
-	 * @param string $method
-	 * @param array  $params
-	 *
-	 * @return PresenterResponse
+	 * @param array $params
 	 */
 	protected function call(string $method, ...$params): PresenterResponse
 	{
