@@ -6,10 +6,11 @@ parameters:
 		- tests
 	bootstrapFiles:
 		- vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php
-	excludes_analyse:
+	excludePaths:
 		- src/Config/Routes.php
 		- src/Views/*
 	ignoreErrors:
+		- '#Cannot access property \$[A-Za-z]+ on array\|object#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- Faker\Generator

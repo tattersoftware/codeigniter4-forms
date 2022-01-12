@@ -1,7 +1,7 @@
 <?php
 
 use CodeIgniter\Controller;
-use CodeIgniter\Test\ControllerTester;
+use CodeIgniter\Test\ControllerTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
 use Tests\Support\Controllers\API\Factories;
 use Tests\Support\FormsTestCase;
@@ -18,7 +18,8 @@ use Tests\Support\Models\FactoryModel;
  */
 class ControllerReadTest extends FormsTestCase
 {
-	use ControllerTester, DatabaseTestTrait;
+	use ControllerTestTrait;
+	use DatabaseTestTrait;
 
 	protected $migrateOnce = true;
 	protected $seedOnce    = true;

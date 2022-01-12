@@ -103,7 +103,7 @@ class ResourceController extends BaseController
 	 */
 	protected function actionFailed(string $action, int $status = 400)
 	{
-		$errors = $this->model->errors() ?? [lang("Forms.{$action}Failed", [ucfirst($this->name)])];
+		$errors = $this->model->errors() ?: [lang("Forms.{$action}Failed", [ucfirst($this->name)])];
 
 		$response = [
 			'status'   => $status,

@@ -132,7 +132,7 @@ class ResourcePresenter extends BasePresenter
 
 	protected function actionFailed(string $action)
 	{
-		$errors = $this->model->errors() ?? [
+		$errors = $this->model->errors() ?: [
 			lang("Forms.{$action}Failed", [$this->name]),
 		];
 

@@ -1,6 +1,6 @@
 <?php
 
-use CodeIgniter\Test\ControllerTester;
+use CodeIgniter\Test\ControllerTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
 use Tests\Support\Controllers\API\Factories;
 use Tests\Support\FormsTestCase;
@@ -14,7 +14,8 @@ use Tests\Support\Models\FactoryModel;
  */
 class ControllerWriteTest extends FormsTestCase
 {
-	use ControllerTester, DatabaseTestTrait;
+	use ControllerTestTrait;
+	use DatabaseTestTrait;
 
 	/**
 	 * Sets up the Controller for testing.
@@ -40,7 +41,7 @@ class ControllerWriteTest extends FormsTestCase
 
 		$result->assertOK();
 		$result->assertStatus(201);
-		$this->assertEquals('New Factory created successfully.', $result->response()->getReason());
+		$this->assertEquals('New Factory created successfully.', $result->response()->getReasonPhrase());
 
 		// Get the last Factory to confirm the response
 		$factories = model(FactoryModel::class)->findAll();
@@ -59,7 +60,7 @@ class ControllerWriteTest extends FormsTestCase
 
 		$result->assertOK();
 		$result->assertStatus(200);
-		$this->assertEquals('Factory updated successfully.', $result->response()->getReason());
+		$this->assertEquals('Factory updated successfully.', $result->response()->getReasonPhrase());
 
 		$factory = model(FactoryModel::class)->find($factory->id);
 		$this->assertEquals($factory, json_decode($result->response()->getBody()));
@@ -73,7 +74,7 @@ class ControllerWriteTest extends FormsTestCase
 
 		$result->assertOK();
 		$result->assertStatus(200);
-		$this->assertEquals('Factory deleted successfully.', $result->response()->getReason());
+		$this->assertEquals('Factory deleted successfully.', $result->response()->getReasonPhrase());
 
 		$factory = model(FactoryModel::class)->find($factory->id);
 		$this->assertNull($factory);

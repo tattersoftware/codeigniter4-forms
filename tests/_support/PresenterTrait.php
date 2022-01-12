@@ -2,7 +2,7 @@
 
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\Request;
-use CodeIgniter\Test\ControllerTester;
+use CodeIgniter\Test\ControllerTestTrait;
 use Config\Services;
 
 /**
@@ -19,7 +19,7 @@ use Config\Services;
  */
 trait PresenterTrait
 {
-	use ControllerTester;
+	use ControllerTestTrait;
 
 	/**
 	 * Initializes routing and config.

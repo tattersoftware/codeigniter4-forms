@@ -15,7 +15,8 @@ use Tests\Support\Models\FactoryModel;
  */
 class PresenterReadTest extends FormsTestCase
 {
-	use DatabaseTestTrait, PresenterTrait;
+	use DatabaseTestTrait;
+	use PresenterTrait;
 
 	protected $migrateOnce = true;
 	protected $seedOnce    = true;
