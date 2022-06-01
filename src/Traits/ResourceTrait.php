@@ -7,7 +7,8 @@ use Tatter\Forms\Exceptions\FormsException;
 
 /**
  * @property Model $model
- * @mixin Tatter\Forms\Controllers\ResourcePresenter, Tatter\Forms\Controllers\ResourceController
+ * @mixin Tatter\Forms\Controllers\ResourceController
+ * @mixin Tatter\Forms\Controllers\ResourcePresenter
  */
 trait ResourceTrait
 {
