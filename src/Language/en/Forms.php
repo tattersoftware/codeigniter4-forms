@@ -1,5 +1,7 @@
 <?php
 
+namespace Tatter\Forms\Language\en;
+
 return [
     'missingModel' => 'No valid model loaded from {0}',
     'notFound'     => 'Unable to find the {0} you requested.',

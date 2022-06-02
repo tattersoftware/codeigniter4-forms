@@ -31,20 +31,9 @@ abstract class FormsTestCase extends CIUnitTestCase
      */
     protected $routes;
 
-    /**
-     * @var FormsConfig
-     */
-    protected $config;
-
-    /**
-     * @var FactoryModel
-     */
-    protected $model;
-
-    /**
-     * @var MockCodeIgniter
-     */
-    protected $codeigniter;
+    protected FormsConfig $config;
+    protected FactoryModel $model;
+    protected MockCodeIgniter $codeigniter;
 
     /**
      * Initializes required helpers.

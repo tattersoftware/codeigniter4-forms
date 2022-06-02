@@ -45,8 +45,7 @@ final class PresenterWriteTest extends FormsTestCase
         $result->assertRedirectTo('factories');
 
         // Get the last Factory to confirm the response
-        $factories = model(FactoryModel::class)->findAll();
-        $factory   = end($factories);
+        model(FactoryModel::class)->findAll();
 
         $expected = [
             [

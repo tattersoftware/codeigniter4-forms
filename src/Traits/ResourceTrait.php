@@ -3,12 +3,14 @@
 namespace Tatter\Forms\Traits;
 
 use CodeIgniter\Model;
+use Tatter\Forms\Controllers\ResourceController;
+use Tatter\Forms\Controllers\ResourcePresenter;
 use Tatter\Forms\Exceptions\FormsException;
 
 /**
  * @property Model $model
- * @mixin Tatter\Forms\Controllers\ResourceController
- * @mixin Tatter\Forms\Controllers\ResourcePresenter
+ * @mixin ResourceController
+ * @mixin ResourcePresenter
  */
 trait ResourceTrait
 {

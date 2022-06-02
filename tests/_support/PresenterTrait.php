@@ -28,7 +28,7 @@ trait PresenterTrait
     protected function setUpPresenterTrait(): void
     {
         // Mock the renderer
-        Services::injectMock('renderer', new MockRenderer(config('View')));
+        Services::injectMock('renderer', new MockRenderer(config('View'), config('Paths')->viewDirectory));
     }
 
     /**
