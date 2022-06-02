@@ -15,24 +15,17 @@ use Throwable;
  */
 class PresenterResponse
 {
-    /**
-     * @var TestResponse
-     */
-    public $response;
+    public TestResponse $response;
 
     /**
      * The View file that would have been called.
-     *
-     * @var string
      */
-    public $view;
+    public string $view;
 
     /**
      * Any data which would have been passed to the View.
-     *
-     * @var array
      */
-    public $data;
+    public array $data;
 
     /**
      * Extracts the body and saves results.
@@ -40,7 +33,7 @@ class PresenterResponse
     public function __construct(TestResponse $response)
     {
         if (! $body = $response->response()->getBody()) {
-            throw new RuntimeException('Empty body from ' . $response->request()->uri);
+            throw new RuntimeException('Empty body from ' . $response->request()->getUri());
         }
 
         try {

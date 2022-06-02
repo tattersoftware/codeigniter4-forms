@@ -84,8 +84,6 @@ class ResourcePresenter extends BasePresenter
             return $object;
         }
 
-        $data = [$this->name => $object];
-
         return view($this->request->isAJAX() ? "{$this->names}/confirm" : "{$this->names}/remove", [
             $this->name => $object,
         ]);

@@ -99,7 +99,7 @@ class ResourceController extends BaseController
         $response = [
             'status'   => $status,
             'error'    => ucfirst($action) . ' Failed',
-            'messages' => $this->model->errors(),
+            'messages' => $errors,
         ];
 
         return $this->respond($response, $status);
