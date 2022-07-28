@@ -25,7 +25,6 @@
         "php": "^7.4 || ^8.0",
         "components/jquery": "^3.3",
         "tatter/alerts": "^2.0",
-        "tatter/assets": "^2.0",
         "twbs/bootstrap": "^4.3"
     },
     "require-dev": {
