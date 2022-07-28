@@ -13,9 +13,7 @@ $finder = Finder::create()
     ->exclude('build')
     ->append([__FILE__]);
 
-$overrides = [
-    'php_unit_strict' => false,
-];
+$overrides = [];
 
 $options = [
     'finder'    => $finder,
