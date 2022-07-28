@@ -47,14 +47,7 @@ final class PresenterWriteTest extends FormsTestCase
         // Get the last Factory to confirm the response
         model(FactoryModel::class)->findAll();
 
-        $expected = [
-            [
-                'class' => 'success',
-                'text'  => 'New factory created successfully.',
-            ],
-        ];
-
-        $result->assertSessionHas('alerts-queue', $expected);
+        $result->assertSessionHas('success', 'New factory created successfully.');
     }
 
     public function testUpdate()

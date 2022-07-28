@@ -10,7 +10,7 @@ class ResourcePresenter extends BasePresenter
 {
     use ResourceTrait;
 
-    protected $helpers = ['alerts', 'form'];
+    protected $helpers = ['form'];
 
     //--------------------------------------------------------------------
     // CRUD Methods
@@ -29,9 +29,7 @@ class ResourcePresenter extends BasePresenter
             return $this->actionFailed('create');
         }
 
-        $this->alert('success', lang('Forms.created', [$this->name]));
-
-        return redirect()->to(site_url($this->names));
+        return redirect()->to(site_url($this->names))->with('success', lang('Forms.created', [$this->name]));
     }
 
     public function index()
@@ -73,9 +71,7 @@ class ResourcePresenter extends BasePresenter
             return $this->actionFailed('update');
         }
 
-        $this->alert('success', lang('Forms.updated', [$this->name]));
-
-        return redirect()->to(site_url("{$this->names}/{$id}"));
+        return redirect()->to(site_url("{$this->names}/{$id}"))->with('success', lang('Forms.updated', [$this->name]));
     }
 
     public function remove($id = null)
@@ -99,9 +95,7 @@ class ResourcePresenter extends BasePresenter
             return $this->actionFailed('delete');
         }
 
-        $this->alert('success', lang('Forms.deleted', [$this->name]));
-
-        return redirect()->to(site_url("{$this->names}"));
+        return redirect()->to(site_url("{$this->names}"))->with('success', lang('Forms.updated', [$this->name]));
     }
 
     //--------------------------------------------------------------------
@@ -114,11 +108,7 @@ class ResourcePresenter extends BasePresenter
             return $object;
         }
 
-        $error = lang('Forms.notFound', [$this->name]);
-
-        $this->alert('danger', $error);
-
-        return redirect()->back()->withInput()->with('errors', [$error]);
+        return redirect()->back()->withInput()->with('errors', [lang('Forms.notFound', [$this->name])]);
     }
 
     protected function actionFailed(string $action)
@@ -127,17 +117,6 @@ class ResourcePresenter extends BasePresenter
             lang("Forms.{$action}Failed", [$this->name]),
         ];
 
-        foreach ($errors as $error) {
-            $this->alert('warning', $error);
-        }
-
         return redirect()->back()->withInput()->with('errors', $errors);
-    }
-
-    protected function alert($status, $message)
-    {
-        if ($alerts = service('alerts')) {
-            $alerts->add($status, $message);
-        }
     }
 }

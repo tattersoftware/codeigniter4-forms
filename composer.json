@@ -9,7 +9,7 @@
         "forms",
         "REST",
         "AJAX",
-        "javascript",
+        "JavaScript",
         "CRUD"
     ],
     "authors": [
@@ -22,15 +22,10 @@
     ],
     "homepage": "https://github.com/tattersoftware/codeigniter4-forms",
     "require": {
-        "php": "^7.4 || ^8.0",
-        "components/jquery": "^3.3",
-        "tatter/alerts": "^2.0",
-        "tatter/assets": "^2.0",
-        "twbs/bootstrap": "^4.3"
+        "php": "^7.4 || ^8.0"
     },
     "require-dev": {
         "codeigniter4/framework": "^4.1",
-        "mikey179/vfsstream": "^1.6",
         "tatter/tools": "^2.0"
     },
     "minimum-stability": "dev",
@@ -54,14 +49,18 @@
         }
     },
     "scripts": {
-        "analyze": "phpstan analyze",
+        "analyze": [
+            "phpstan analyze",
+            "psalm",
+            "rector process --dry-run"
+        ],
         "ci": [
             "Composer\\Config::disableProcessTimeout",
             "@deduplicate",
             "@analyze",
+            "@composer normalize --dry-run",
             "@test",
             "@inspect",
-            "rector process",
             "@style"
         ],
         "deduplicate": "phpcpd app/ src/",

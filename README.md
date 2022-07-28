@@ -1,8 +1,9 @@
 # Tatter\Forms
 RESTful AJAX forms for CodeIgniter 4
 
-[![](https://github.com/tattersoftware/codeigniter4-forms/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-forms/actions?query=workflow%3A%22PHPUnit)
-[![](https://github.com/tattersoftware/codeigniter4-forms/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-forms/actions?query=workflow%3A%22PHPStan)
+[![](https://github.com/tattersoftware/codeigniter4-forms/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/codeigniter4-forms/actions/workflows/phpunit.yml)
+[![](https://github.com/tattersoftware/codeigniter4-forms/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/codeigniter4-forms/actions/workflows/phpstan.yml)
+[![](https://github.com/tattersoftware/codeigniter4-forms/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/codeigniter4-forms/actions/workflows/deptrac.yml)
 [![Coverage Status](https://coveralls.io/repos/github/tattersoftware/codeigniter4-forms/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/codeigniter4-forms?branch=develop)
 
 ## Quick Start
@@ -20,32 +21,27 @@ AJAX forms with CodeIgniter 4's native RESTful implementation.
 
 Install easily via Composer to take advantage of CodeIgniter 4's autoloading capabilities
 and always be up-to-date:
-	> composer require tatter/forms
+```shell
+> composer require tatter/forms
+```
 
 Or, install manually by downloading the source files and adding the directory to
-`app/Config/Autoload.php`.
+**app/Config/Autoload.php**.
 
-After installation you will need to publish the required assets to your **public** folder,
-as defined by the [manifest files](src/Manifests/):
-	php spark assets:publish
+After installation you will need to copy or publish the required assets to your
+**public/** folder. If you want to automate this process check out the
+[Assets Library](https://github.com/tattersoftware/codeigniter4-assets).
 
-> *Tip*: You can add the publish command to your **composer.json**'s `post-update-cmd` section to ensure your assets are always in sync with the package source.
-
-Finally, notify your view/layout of your intention to use the JavaScript for your forms (your paths
-may vary):
-```
-<link href="assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+Finally, notify your view/layout of your intention to use the JavaScript for your forms
+(your paths may vary):
+```html
 <script src="assets/vendor/forms/forms.js" type="text/javascript"></script>
-<script src="assets/vendor/bootstrap/bootstrap.bundle.min.js" type="text/javascript"></script>
 <script>
 	var baseUrl = "<?= base_url() ?>";
 	var siteUrl = "<?= site_url() ?>";
 	var apiUrl  = "<?= site_url(config('forms')->apiUrl) ?>";
 </script>
 ```
-
-> *Tip*: **Forms** includes [Tatter\Assets](https://github.com/tattersoftware/codeigniter4-assets) which you can use to auto-include assets via the Config file
-
 
 ## Configuration (optional)
 
@@ -55,12 +51,12 @@ comments. If no config file is found the library will use its defaults.
 
 ## Usage
 
-*N.B. Please consider this module to be modular itself - you need not use every piece!*
+***Note:*** Please consider this module to be modular itself - you need not use every piece!*
 *Treat portions of the code that you do not use as examples for how to implement this in your own app.*
 
 After the initial installation there are a few pieces to implement. **Forms** will run
-CRUD-style operations for you by interfacing views with the **ResourcePresenter** or
-**ResourceController** depending on the method of interaction (i.e. page load versus AJAX).
+CRUD-style operations for you by interfacing views with the `ResourcePresenter` or
+`ResourceController` depending on the method of interaction (i.e. page load versus AJAX).
 Not surprisingly, you will need some **Views** and two **Controllers** per resource.
 
 ### Naming
@@ -69,11 +65,11 @@ Not surprisingly, you will need some **Views** and two **Controllers** per resou
 If you are creating a game, your resource names might be *hero(es)*, *level(s)*, *reward(s)*,
 etc. The naming convention is important for autoloading resources and their endpoints. By
 default, **Forms** will use the name of the model associated with your resource. So a URL of
-`heroes/new` would route to the **HeroController** which uses **HeroModel** and the whole
-resource would be dubbed **hero** off that model.
+`heroes/new` would route to the `HeroController` which uses `HeroModel` and the whole
+resource would be dubbed "hero" off that model.
 
 If you need to set your own names, do so with your model's `$name` property:
-```
+```php
 class HeroModel extends \CodeIgniter\Model
 {
 	public $name = 'superhero';
@@ -97,38 +93,49 @@ for each resource (where {names} is the plural of your resource name):
 
 As you can see **Forms** expects some views that are part of a full page load layout and
 some that can be injected into an existing page via AJAX (e.g. in a modal). See
-[examples](examples/Views/) for a full set of example view files.
+[examples](examples/Views/) for a full set of example view files (note: these are presented
+"as is" and may not always be the best solution for all use cases).
 
 ### Controllers
 
 In addition to the views, you will need two controllers for each resource:
-* **Controllers/{names}.php** - Your presenter for page loads, extends `\Tatter\Forms\Controllers\ResourcePresenter.php`
-* **Controllers/API/{names}.php** - Your controller for AJAX calls, extends `\Tatter\Forms\Controllers\ResourceController.php`
+* **Controllers/{names}.php** - Your presenter for page loads, extends `Tatter\Forms\Controllers\ResourcePresenter`
+* **Controllers/API/{names}.php** - Your controller for AJAX calls, extends `Tatter\Forms\Controllers\ResourceController`
 
-As with standard framework controllers, your controllers set their model via the `$modelName`
-property:
-```
-<?php namespace App\Controllers;
+As with other framework RESTful controllers, your controllers set their model via the
+`$modelName` property:
+```php
+<?php
 
-class Heroes extends \Tatter\Forms\Controllers\ResourcePresenter
+namespace App\Controllers;
+
+use App\Models\HeroModel;
+use Tatter\Forms\Controllers\ResourcePresenter;
+
+class Heroes extends ResourcePresenter
 {	
-	protected $modelName = 'App\Models\HeroModel';
+	protected $modelName = HeroModel::class;
 	...
 ```
 
 Your resource controller can take an additional property, `$format`, to specify response
 format (**Forms** currently only supports JSON):
-```
-<?php namespace App\Controllers\API;
+```php
+<?php
 
-class Heroes extends \Tatter\Forms\Controllers\ResourceController
+namespace App\Controllers\API;
+
+use App\Models\HeroModel;
+use Tatter\Forms\Controllers\ResourceController;
+
+class Heroes extends ResourceController
 {	
-	protected $modelName = 'App\Models\BookModel';
+	protected $modelName = HeroModel::class;
 	protected $format    = 'json';
 	...
 ```
 
-See [RESTful Resource Handling](https://codeigniter4.github.io/userguide/incoming/restful.html)
+See [RESTful Resource Handling](https://codeigniter.com/user_guide/incoming/restful.html)
 in the CodeIgniter 4 User Guide for more info on using resource controllers.
 
 ### Routes
@@ -152,10 +159,7 @@ and controllers and auto-handling AJAX requests. If you want a more complete set
 or fully automated object handler you will want to include your own third-party tools and
 implement them in your view files.
 
-## Appendix
+#### jQuery
 
-### jQuery
-
-This package uses jQuery because Bootstrap 4 requires it. The Bootstrap team officially
-announced plans to remove the jQuery dependency in Bootstrap 5, at which point this package
-will transition to native JavaScript (via [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)).
+This package uses jQuery (not included). Future versions will drop jQuery in favor of
+native JavaScript (via [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)).

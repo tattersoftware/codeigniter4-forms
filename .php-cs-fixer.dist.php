@@ -14,6 +14,7 @@ $finder = Finder::create()
     ->append([__FILE__]);
 
 $overrides = [
+    // Some tests need to be rewritten to support assertSame instead of assertEquals
     'php_unit_strict' => false,
 ];
 
