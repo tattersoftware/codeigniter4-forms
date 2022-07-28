@@ -80,7 +80,7 @@ abstract class ResourceController extends BaseController
      */
     protected function ensureExists($id = null)
     {
-        if (isset($id) && $object = $this->model->find($id)) {
+        if (isset($id) && $object = $this->model->withDeleted()->find($id)) {
             return $object;
         }
 

@@ -104,7 +104,7 @@ class ResourcePresenter extends BasePresenter
 
     protected function ensureExists($id = null)
     {
-        if ($object = $this->model->find($id)) {
+        if ($object = $this->model->withDeleted()->find($id)) {
             return $object;
         }
 
