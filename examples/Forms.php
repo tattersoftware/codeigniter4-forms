@@ -17,5 +17,5 @@ use Tatter\Forms\Config\Forms as BaseConfig;
 class Forms extends BaseConfig
 {
     // URL base for Resource controllers
-    public $apiUrl = 'api/';
+    public string $apiUrl = 'api/';
 }

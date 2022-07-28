@@ -8,8 +8,6 @@ class Forms extends BaseConfig
 {
     /**
      * URL base for Resource controllers
-     *
-     * @var string
      */
-    public $apiUrl = 'api/';
+    public string $apiUrl = 'api/';
 }
